@@ -1,0 +1,144 @@
+<div>
+    <button type="submit" (click)="modalactualizarInventario(null, false)" class="btn btn-success">Crear</button>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Cantidad Entr.</th>
+                <th scope="col">Cantidad Alerta</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Documento</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="_table != null">
+            <tr *ngFor="let item of _table">
+                <td>
+                    {{ item.cantidadEntrada }}
+                </td>
+                <td>
+                    {{ item.cantidad }}
+                </td>
+                <td>
+                    {{ item?.idProductoNavigation?.nombre }}
+                </td>
+                <td>
+                    {{ item.codigo }}
+                </td>
+                <td>
+                    {{ item.precio }}
+                </td>
+                <td>
+                    {{ item.descripcion }}
+                </td>
+                <td>
+                    {{ item.nombreDocumento }}
+                </td>
+                <td>
+                    <button type="submit" (click)="modalactualizarInventario(item, true)"
+                        class="btn btn-success">Actualizar</button>                                        
+                </td>
+                <td>                                   
+                    <button (click)="descargarArchivo(item)" *ngIf="item.nombreDocumento != null" type="button" class="btn btn-success">
+                        Descargar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<!-- Button trigger modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="_formulario">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <label>Cantidad entrada</label>
+                                <div *ngIf="_formulario.controls['cantidadEntrada'].errors 
+                        && !_formulario.controls['cantidadEntrada'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Cantidad entrada obligatorio
+                                </div>
+                                <input type="number" formControlName="cantidadEntrada" class="form-control"
+                                    id="cantidadEntrada" name="cantidadEntrada"
+                                    placeholder="Cantidad de entrada" /><br />
+                            </div>
+                            <div class="form-group">
+                                <label>Código</label>
+                                <div *ngIf="_formulario.controls['codigo'].errors 
+                            && !_formulario.controls['codigo'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Código es obligatorio
+                                </div>
+                                <input type="text" formControlName="codigo" class="form-control" id="codigo"
+                                    name="codigo" placeholder="Código" /><br />
+                            </div>
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <div *ngIf="_formulario.controls['precio'].errors 
+                            && !_formulario.controls['precio'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Precio es obligatorio
+                                </div>
+                                <input type="number" formControlName="precio" class="form-control" id="precio"
+                                    name="precio" placeholder="Precio" /><br />
+                            </div>
+                            <div class="form-group">
+                                <label>Producto</label>
+                                <div *ngIf="_formulario.controls['idProducto'].errors 
+                                            && !_formulario.controls['idProducto'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Producto es obligatorio
+                                </div>
+                                <select formControlName="idProducto" class="form-select"
+                                    aria-label="Default select example">
+                                    <option *ngFor="let product of _datosProductos" [value]="product.id">
+                                        {{product.nombre}}
+                                    </option>
+                                </select>
+                            </div><br />
+                            <div class="form-group">
+                                <label>Documento</label><br />
+                                <input type="file" id="file" class="form-label" (change)="handleFileInput($event)">
+                                {{ _nombreDocumento }}
+                            </div><br />
+                            <div class="form-group">
+                                <label>Descripción</label>
+                                <div *ngIf="_formulario.controls['descripcion'].errors 
+                            && !_formulario.controls['descripcion'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Descripción es obligatorio
+                                </div>
+                                <textarea rows="5" formControlName="descripcion" class="form-control" id="descripcion"
+                                    name="descripcion" placeholder="Descripción"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- [disabled]="!_formulario.valid" -->
+                <button (click)="actualizarInventario()" type="submit" class="btn btn-primary btnCrear">
+                    {{ _actualizar == false ? ("Registrar"):("Actualizar") }}
+                </button>&nbsp;
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

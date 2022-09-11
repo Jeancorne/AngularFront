@@ -1,0 +1,32 @@
+<div class="row formulario">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <h1>Iniciar sesión</h1><br />
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+      <p style="font-size: 20px; color: white">Cargando...</p>
+    </ngx-spinner>
+    <form (ngSubmit)="ingresar()" [formGroup]="_formulario">
+      <div class="form-group">
+        <div *ngIf="_formulario.controls['txtUsuario'].errors 
+            && !_formulario.controls['txtUsuario'].pristine" style="margin-bottom: 1%;"
+          class="form-text text-danger alert-danger">
+          Usuario obligatorio
+        </div>
+        <input type="text" formControlName="txtUsuario" class="form-control" id="txtUsuario" name="txtUsuario"
+          placeholder="Nombre" /><br />
+      </div>
+      <div class="form-group">
+        <div *ngIf="_formulario.controls['txtPassword'].errors 
+            && !_formulario.controls['txtPassword'].pristine" style="margin-bottom: 1%;"
+          class="form-text text-danger alert-danger">
+          Usuario obligatorio
+        </div>
+        <input type="password" formControlName="txtPassword" class="form-control" id="txtPassword" name="txtPassword"
+          placeholder="Contraseña" /><br />
+      </div>
+      <button [disabled]="!_formulario.valid" type="submit" class="btn btn-primary btnCrear">Iniciar</button>
+    </form><br />
+    <div class="text-center">
+      <p>¿Sin usuario? <a href="/crearusuario">Registro</a></p>
+    </div>
+  </div>
+</div>

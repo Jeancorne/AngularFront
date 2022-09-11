@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <nav style="margin: auto;text-align: center; margin-top: 1%;" >
+                <a type="button" routerLink="/inicio/inventario" class="btn btn-outline-primary">
+                    Inventario
+                </a> &nbsp;
+                <a type="button" routerLink="/inicio/productos" class="btn btn-outline-primary">
+                    Productos
+                </a>&nbsp;
+                <a type="button" routerLink="/inicio/usuarios" type="button" class="btn btn-outline-primary">
+                    Usuarios
+                </a> &nbsp;
+                <a type="button" (click)="cerrarSesion()"  type="button" class="btn btn-outline-primary">
+                    Cerrar sesión
+                </a> &nbsp;
+
+                <!-- <button type="button"  type="button" class="btn btn-outline-primary">
+                    Cerrar sesión
+                </button> &nbsp; -->
+            </nav>
+        </div>
+    </div><br />
+    <router-outlet></router-outlet>
+</div>

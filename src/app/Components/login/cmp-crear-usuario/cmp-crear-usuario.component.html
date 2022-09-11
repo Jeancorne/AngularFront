@@ -1,0 +1,56 @@
+<div class="row formulario">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h1>Crear usuario</h1><br />
+        <form (ngSubmit)="crearUsuario()" [formGroup]="_formulario">
+            <div class="form-group">
+                <div *ngIf="_formulario.controls['txtNombre'].errors 
+                    && !_formulario.controls['txtNombre'].pristine" style="margin-bottom: 1%;"
+                    class="form-text text-danger alert-danger">
+                    Nombre obligatorio
+                </div>
+                <input type="text" formControlName="txtNombre" class="form-control" id="txtNombre" name="txtNombre"
+                    placeholder="Nombre" /><br />
+            </div>
+            <div class="form-group">
+                <div *ngIf="_formulario.controls['txtApellido'].errors 
+                    && !_formulario.controls['txtApellido'].pristine" style="margin-bottom: 1%;"
+                    class="form-text text-danger alert-danger">
+                    Apellido obligatorio
+                </div>
+                <input type="text" formControlName="txtApellido" class="form-control" id="txtApellido"
+                    name="txtApellido" placeholder="Apellido" /><br />
+            </div>
+            <div class="form-group">
+                <div *ngIf="_formulario.controls['txtCorreo'].errors 
+                    && !_formulario.controls['txtCorreo'].pristine" style="margin-bottom: 1%;"
+                    class="form-text text-danger alert-danger">
+                    Correo obligatorio o no válido
+                </div>
+                <input type="email" formControlName="txtCorreo" class="form-control" id="txtCorreo" name="txtCorreo"
+                    placeholder="Correo" /><br />
+            </div>
+            <div class="form-group">
+                <div *ngIf="_formulario.controls['txtUsuario'].errors 
+                && !_formulario.controls['txtUsuario'].pristine" style="margin-bottom: 1%;"
+                    class="form-text text-danger alert-danger">
+                    Usuario obligatorio
+                </div>
+                <input type="text" formControlName="txtUsuario" class="form-control" id="txtUsuario" name="txtUsuario"
+                    placeholder="Usuario" /><br />
+            </div>
+            <div class="form-group">
+                <div *ngIf="_formulario.controls['txtPassword'].errors 
+                && !_formulario.controls['txtPassword'].pristine" style="margin-bottom: 1%;"
+                    class="form-text text-danger alert-danger">
+                    Contraseña obligatoria
+                </div>
+                <input type="password" formControlName="txtPassword" class="form-control" id="txtPassword"
+                    name="txtPassword" placeholder="Contraseña" /><br />
+            </div>
+            <button [disabled]="!_formulario.valid" type="submit" class="btn btn-primary btnCrear">Crear</button>
+        </form><br />
+        <div class="text-center">
+            <p><a href="/">Iniciar sesión</a></p>
+        </div>
+    </div>
+</div>

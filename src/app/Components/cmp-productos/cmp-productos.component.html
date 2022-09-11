@@ -1,0 +1,56 @@
+<div>
+    <form (ngSubmit)="registrarProducto()" [formGroup]="_formulario">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <div *ngIf="_formulario.controls['txtNombre'].errors 
+                    && !_formulario.controls['txtNombre'].pristine" style="margin-bottom: 1%;"
+                        class="form-text text-danger alert-danger">
+                        Producto obligatorio
+                    </div>
+                    <input type="text" formControlName="txtNombre" class="form-control" id="txtNombre" name="txtNombre"
+                        placeholder="Producto" /><br />
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <div *ngIf="_formulario.controls['txtCantidad'].errors 
+                    && !_formulario.controls['txtCantidad'].pristine" style="margin-bottom: 1%;"
+                        class="form-text text-danger alert-danger">
+                        Cantidad min alerta es obligatoria
+                    </div>
+                    <input type="number" formControlName="txtCantidad" class="form-control" id="txtCantidad" name="txtCantidad"
+                        placeholder="Cantidad" /><br />
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <button [disabled]="!_formulario.valid" type="submit" class="btn btn-primary btnCrear">
+                    {{ _actualizar == true ? ("Actualizar"):("Registrar") }}
+                </button>&nbsp;                                
+                <button *ngIf="_actualizar == true" [disabled]="!_formulario.valid" (click)="cancelarActualizacion()" class="btn btn-primary btnCrear">Cancelar</button>
+            </div>
+        </div>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Cantidad Min Alerta</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="_table != null">
+            <tr *ngFor="let item of _table">
+                <td>
+                    {{ item.nombre }}
+                </td>
+                <td>
+                    {{ item.cantidadMinAlerta }}
+                </td>
+                <td>
+                    <button type="submit" (click)="actualizarProducto(item)" class="btn btn-success">Actualizar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

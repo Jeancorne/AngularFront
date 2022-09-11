@@ -1,0 +1,122 @@
+<div>   
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Estado</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="_table != null">
+            <tr *ngFor="let item of _table">
+                <td>
+                    {{ item.nombre }}
+                </td>
+                <td>
+                    {{ item.apellido }}
+                </td>
+                <td>
+                    {{ item.correo }}
+                </td>
+                <td>
+                    {{ item.activo != null ? (item.activo == true ? ("Activo"):("Inactivo")):("N/N") }}
+                </td>
+                <td>
+                    <button type="submit" (click)="openModal(item)" class="btn btn-success">Actualizar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="_formulario">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <div *ngIf="_formulario.controls['txtNombre'].errors 
+                        && !_formulario.controls['txtNombre'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Nombre obligatorio
+                                </div>
+                                <input type="text" formControlName="txtNombre" class="form-control" id="txtNombre"
+                                    name="txtNombre" placeholder="Nombre" /><br />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Apellido</label>
+                                <div *ngIf="_formulario.controls['txtApellido'].errors 
+                            && !_formulario.controls['txtApellido'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Apellido es obligatorio
+                                </div>
+                                <input type="text" formControlName="txtApellido" class="form-control" id="txtApellido"
+                                    name="txtApellido" placeholder="Apellido" /><br />
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Correo</label>
+                                <div *ngIf="_formulario.controls['txtCorreo'].errors 
+                            && !_formulario.controls['txtCorreo'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Correo es obligatorio
+                                </div>
+                                <input type="text" formControlName="txtCorreo" class="form-control" id="txtCorreo"
+                                    name="txtCorreo" placeholder="Correo" /><br />
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Usuario</label>
+                                <div *ngIf="_formulario.controls['txtUsuario'].errors 
+                            && !_formulario.controls['txtUsuario'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Usuario es obligatorio
+                                </div>
+                                <input type="text" formControlName="txtUsuario" class="form-control" id="txtUsuario"
+                                    name="txtUsuario" placeholder="Usuario" /><br />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Estado</label>
+                                <div *ngIf="_formulario.controls['txtCorreo'].errors 
+                            && !_formulario.controls['txtCorreo'].pristine" style="margin-bottom: 1%;"
+                                    class="form-text text-danger alert-danger">
+                                    Estado es obligatorio
+                                </div>
+                                <select formControlName="Activo" style="width: 100%;" class="custom-select" id="Estado">
+                                    <option value="true">Activo</option>
+                                    <option value="false">Inactivo</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)="actualizarUsuario()" [disabled]="!_formulario.valid" type="submit"
+                    class="btn btn-primary btnCrear">
+                    {{ _actualizar == false ? ("Registrar"):("Actualizar") }}
+                </button>&nbsp;
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
